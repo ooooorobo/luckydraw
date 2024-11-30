@@ -2,12 +2,18 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
+import http from 'http';
 import * as fs from 'fs';
+import { Server } from 'socket.io';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function createServer() {
   const app = express();
+  const server = http.createServer(app);
+  const io = new Server(server, {
+    allowEIO3: true,
+  });
 
   const vite = await createViteServer({
     server: { middlewareMode: true },
@@ -31,8 +37,16 @@ async function createServer() {
     }
   });
 
-  app.listen(3000);
-  console.log(`App is running on http://localhost:3000`);
+  io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+      console.log('user disconnected');
+    });
+  });
+
+  server.listen(3000, () => {
+    console.log(`listening on http://localhost:3000`);
+  });
 }
 
 createServer();
