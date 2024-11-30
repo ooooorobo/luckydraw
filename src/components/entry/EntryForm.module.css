@@ -1,0 +1,14 @@
+.Form {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  & .Error {
+    color: indianred;
+  }
+
+  & button {
+    margin-top: 24px;
+  }
+}
