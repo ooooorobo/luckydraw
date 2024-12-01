@@ -29,18 +29,13 @@ export const Roulette = forwardRef(function _Roulette({ list }: { list: Roulette
     const relativeDistance = (rows * cardsPerRow + position - currentIndex) * cardSpacing;
 
     // 랜덤 오프셋 추가
-    const randomize = Math.random() * (cardWidth / 2);
+    const randomize = Math.random() * (cardWidth * 0.6) + cardWidth * 0.2 - cardWidth / 2;
     const landingPosition = relativeDistance + randomize;
-
-    const axes = {
-      x: Math.floor(Math.random() * 50) / 100,
-      y: Math.floor(Math.random() * 20) / 100,
-    };
 
     if (!wheelRef.current || !wheelRef.current?.style) return;
 
     // Set animations and spinner translation
-    wheelRef.current!.style.transitionTimingFunction = `cubic-bezier(0, ${axes.x}, ${axes.y}, 1)`;
+    wheelRef.current!.style.transitionTimingFunction = `cubic-bezier(0, 0.5, 0.2, 1)`;
     wheelRef.current!.style.transitionDuration = `6s`;
     wheelRef.current!.style.transform = `translate3d(-${landingPosition}px, 0, 0)`;
 
