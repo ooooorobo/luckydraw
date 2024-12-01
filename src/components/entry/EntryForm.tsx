@@ -31,7 +31,7 @@ export const EntryForm = ({ setName }: { setName: (name: string) => void }) => {
       <p>안녕하세요! 이름을 알려주세요</p>
 
       <form className={styles.Form} action="" onSubmit={onSubmit}>
-        <input type="text" name={'name'} minLength={1} onChange={() => setError(false)} value={'김감자'} />
+        <input type="text" name={'name'} minLength={1} onChange={() => setError(false)} />
         {error && <small className={styles.Error}>* 이미 이 이름을 쓰는 사람이 들어가 있어요</small>}
         <button type={'submit'} disabled={loading}>
           입장하기
