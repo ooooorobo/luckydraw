@@ -6,6 +6,7 @@ import http from 'http';
 import { Server } from 'socket.io';
 import { handleSocket } from './socket.js';
 import 'dotenv/config';
+import * as fs from 'fs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -28,11 +29,23 @@ async function createServer() {
 
   app.use(vite.middlewares);
 
-  app.use(express.static(path.join(__dirname, '../dist/client')));
-
-  app.use('*', async (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../dist/client', 'index.html'));
-  });
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../dist/client')));
+    app.use('*', async (req, res, next) => {
+      res.sendFile(path.join(__dirname, '../dist/client', 'index.html'));
+    });
+  } else {
+    app.get('*', async (req, res, next) => {
+      try {
+        let template = fs.readFileSync(path.resolve(__dirname, '..', 'index.html'), 'utf-8');
+        const html = await vite.transformIndexHtml(req.originalUrl, template);
+        res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+      } catch (error) {
+        vite.ssrFixStacktrace(error);
+        next(error);
+      }
+    });
+  }
 
   handleSocket(io);
 
