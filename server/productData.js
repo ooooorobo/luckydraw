@@ -11,7 +11,7 @@ export const ProductData = [
   },
   {
     name: '먹뱉 인형 2',
-    description: '아쉬울까봐 하나 더',
+    description: '아직 배송이 안 와서 오면 드립니다',
     img: '/image/dlsgud2.jpeg',
   },
   {
@@ -26,8 +26,8 @@ export const ProductData = [
   },
   {
     name: '과자 물고 가는 갈매기',
-    description: '수요일에 드립니다',
-    img: '/image/img.png',
+    description: '새우깡',
+    img: '/image/rkfaorl.jpeg',
   },
   {
     name: '액막이 명태 예약권',
