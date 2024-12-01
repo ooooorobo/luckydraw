@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node server/server",
+    "dev": "NODE_ENV=development node server/server",
+    "start": "NODE_ENV=production node server/server",
     "build:client": "vite build --outDir dist/client",
     "lint": "eslint .",
     "preview": "vite preview"

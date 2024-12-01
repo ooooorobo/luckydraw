@@ -3,7 +3,6 @@ import { fileURLToPath } from 'node:url';
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import http from 'http';
-import * as fs from 'fs';
 import { Server } from 'socket.io';
 import { handleSocket } from './socket.js';
 import 'dotenv/config';
@@ -15,6 +14,11 @@ async function createServer() {
   const server = http.createServer(app);
   const io = new Server(server, {
     allowEIO3: true,
+    ...(process.env.NODE_ENV === 'development' && {
+      cors: {
+        origin: 'http://localhost:3000',
+      },
+    }),
   });
 
   const vite = await createViteServer({
@@ -24,19 +28,10 @@ async function createServer() {
 
   app.use(vite.middlewares);
 
+  app.use(express.static(path.join(__dirname, '../dist/client')));
+
   app.use('*', async (req, res, next) => {
-    const url = req.originalUrl;
-
-    try {
-      let template = fs.readFileSync(path.resolve(__dirname, '..', 'index.html'), 'utf-8');
-
-      template = await vite.transformIndexHtml(url, template);
-
-      res.status(200).set({ 'Content-Type': 'text/html' }).end(template);
-    } catch (e) {
-      vite.ssrFixStacktrace(e);
-      next(e);
-    }
+    res.sendFile(path.join(__dirname, '../dist/client', 'index.html'));
   });
 
   handleSocket(io);
