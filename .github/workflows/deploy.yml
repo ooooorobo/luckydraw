@@ -1,0 +1,40 @@
+name: Deploy to cloudtype
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Connect deploy key
+        uses: cloudtype-github-actions/connect@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          ghtoken: ${{ secrets.GHP_TOKEN }}
+      - name: Deploy
+        uses: cloudtype-github-actions/deploy@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          project: orobos654/proj
+          stage: main
+          yaml: |
+            name: luckydraw
+            app: node@20
+            options:
+              ports: "3000"
+              build: npm run build:client
+              env:
+                - name: ADMIN_NAME
+                  value: ${{ secrets.ADMIN_NAME }}
+                - name: VITE_WS_URL
+                  value: ${{ secrets.WS_URL }}
+              buildenv: []
+              install: npm i
+              start: npm start
+            context:
+              git:
+                url: git@github.com:${{ github.repository }}.git
+                ref: ${{ github.ref }}
