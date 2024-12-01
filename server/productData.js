@@ -1,5 +1,10 @@
 export const ProductData = [
   {
+    name: '공개 예정',
+    description: '잠시후 애장품이 공개됩니다',
+    img: '/image/waiting.png',
+  },
+  {
     name: '먹뱉 인형',
     description: '검탐 스쿼드 유행템',
     img: '/image/dlsgud1.jpeg',
@@ -22,7 +27,7 @@ export const ProductData = [
   {
     name: '과자 물고 가는 갈매기',
     description: '수요일에 드립니다',
-    img: '/image/rkfaorl.jpeg',
+    img: '/image/img.png',
   },
   {
     name: '액막이 명태 예약권',
