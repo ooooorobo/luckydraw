@@ -1,13 +1,13 @@
 import './App.css';
 import { useSocketIO } from 'react-use-websocket';
-import { EntryForm } from './components/entry/EntryForm.tsx';
+import { Room } from './components/room/Room.tsx';
 
 function App() {
   const { sendMessage, lastMessage, readyState } = useSocketIO('ws://localhost:3000');
 
   return (
     <>
-      <EntryForm />
+      <Room />
     </>
   );
 }
