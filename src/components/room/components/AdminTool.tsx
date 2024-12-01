@@ -1,5 +1,6 @@
 import { FormEvent } from 'react';
 import { socket } from '../../../lib/socket.ts';
+import styles from '../Room.module.css';
 
 export const AdminTool = () => {
   const onSubmitChat = (e: FormEvent<HTMLFormElement>) => {
@@ -25,7 +26,7 @@ export const AdminTool = () => {
   };
 
   return (
-    <div>
+    <div className={styles.AdminTools}>
       <form action="" onSubmit={onSubmitChat}>
         <input name={'message'} type="text" placeholder={'채팅 입력'} />
         <button type={'submit'}>전송</button>
