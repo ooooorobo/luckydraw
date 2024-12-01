@@ -1,12 +1,33 @@
 import styles from './Room.module.css';
 import { Roulette, RouletteRef } from './Roulette.tsx';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { ProductCard } from './components/ProductCard.tsx';
 import { RoomData } from '../../App.tsx';
+import { AdminTool } from './components/AdminTool.tsx';
+import { socket } from '../../lib/socket.ts';
 
 export const Room = ({ roomState, name, isAdmin }: { roomState: RoomData; name: string; isAdmin: boolean }) => {
-  console.log(roomState);
   const rouletteRef = useRef<RouletteRef>();
+  const chatRef = useRef<HTMLTextAreaElement | null>(null);
+
+  useEffect(() => {
+    const textarea = chatRef.current;
+    if (!textarea) return;
+
+    textarea.scrollTop = textarea.scrollHeight;
+  }, [roomState]);
+
+  useEffect(() => {
+    const onSpin = (winner: { name: string }, randomize: number) => {
+      rouletteRef.current?.rotate(winner.name, randomize);
+    };
+
+    socket.on('spin', onSpin);
+
+    return () => {
+      socket.off('spin', onSpin);
+    };
+  }, []);
 
   return (
     <div className={styles.Container}>
@@ -18,8 +39,17 @@ export const Room = ({ roomState, name, isAdmin }: { roomState: RoomData; name: 
         <p>
           <strong>방장의 말</strong>
         </p>
-        <textarea name="chat" id="chat" cols="30" rows="10" readOnly value={'하이하이\nㄱㄱㄱㄱ'}></textarea>
+        <textarea
+          ref={chatRef}
+          name="chat"
+          id="chat"
+          cols="30"
+          rows="10"
+          readOnly
+          value={roomState.chatList.join('\n')}
+        ></textarea>
       </div>
+      {isAdmin && <AdminTool />}
       <div className={styles.ProductCardWrapper}>
         <p>
           <strong>이번 애장품</strong>
@@ -27,7 +57,6 @@ export const Room = ({ roomState, name, isAdmin }: { roomState: RoomData; name: 
         <ProductCard product={roomState.currentProduct} />
       </div>
       <Roulette list={roomState.participants} ref={rouletteRef} />
-      <button onClick={() => rouletteRef?.current?.rotate('3')}>룰렛 돌리기</button>
       <div className={styles.ParticipantWrapper}>
         <p>
           <strong>참가자</strong>
@@ -40,10 +69,4 @@ export const Room = ({ roomState, name, isAdmin }: { roomState: RoomData; name: 
       </div>
     </div>
   );
-};
-
-const product = {
-  name: '먹뱉 인형',
-  description: '검탐 스쿼드 유행템',
-  img: '/image/dlsgud1.jpeg',
 };

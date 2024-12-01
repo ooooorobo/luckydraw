@@ -4,7 +4,7 @@ import styles from './Room.module.css';
 type RouletteContents = { name: string };
 
 export type RouletteRef = {
-  rotate: (winner: string) => void;
+  rotate: (winner: string, randomize: number) => void;
 };
 
 export const Roulette = forwardRef(function _Roulette({ list }: { list: RouletteContents[] }, ref) {
@@ -14,7 +14,7 @@ export const Roulette = forwardRef(function _Roulette({ list }: { list: Roulette
     rotate: spin,
   }));
 
-  const spin = (winnerName: string) => {
+  const spin = (winnerName: string, randomize: number) => {
     const currentIndex = Math.floor(list.length / 2);
     const position = list.findIndex((m) => m.name === winnerName);
 
@@ -29,7 +29,6 @@ export const Roulette = forwardRef(function _Roulette({ list }: { list: Roulette
     const relativeDistance = (rows * cardsPerRow + position - currentIndex) * cardSpacing;
 
     // 랜덤 오프셋 추가
-    const randomize = Math.random() * (cardWidth * 0.6) + cardWidth * 0.2 - cardWidth / 2;
     const landingPosition = relativeDistance + randomize;
 
     if (!wheelRef.current || !wheelRef.current?.style) return;

@@ -7,7 +7,7 @@ export const ProductData = [
   {
     name: '먹뱉 인형 2',
     description: '아쉬울까봐 하나 더',
-    img: '/image/dlsgud1.jpeg',
+    img: '/image/dlsgud2.jpeg',
   },
   {
     name: '잔디 코스터 (2개입)',

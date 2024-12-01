@@ -8,6 +8,7 @@ import { Room } from './components/room/Room.tsx';
 export type RoomData = {
   participants: { name: string }[];
   currentProduct: Product;
+  chatList: string[];
 };
 
 function App() {
