@@ -32,22 +32,14 @@ export const Room = ({ roomState, name, isAdmin }: { roomState: RoomData; name: 
   return (
     <div className={styles.Container}>
       <h1 className={styles.Title}>🤩 럭키드로우 🤩</h1>
-      <p>
-        <strong>{name}</strong>님, 오늘 와주셔서 감사해요!
-      </p>
       <div className={styles.ChatWrapper}>
+        <p>
+          <strong>{name}</strong>님, 오늘 와주셔서 감사해요!
+        </p>
         <p>
           <strong>방장의 말</strong>
         </p>
-        <textarea
-          ref={chatRef}
-          name="chat"
-          id="chat"
-          cols="30"
-          rows="10"
-          readOnly
-          value={roomState.chatList.join('\n')}
-        ></textarea>
+        <textarea ref={chatRef} name="chat" id="chat" readOnly value={roomState.chatList.join('\n')}></textarea>
       </div>
       {isAdmin && <AdminTool />}
       <div className={styles.ProductCardWrapper}>
