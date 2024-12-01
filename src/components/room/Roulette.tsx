@@ -52,8 +52,8 @@ export const Roulette = forwardRef(function _Roulette({ list }: { list: Roulette
     <div className={styles.RouletteWrapper}>
       <div className={styles.Selector}></div>
       <div className={styles.Wheel} ref={wheelRef}>
-        {Array.from({ length: 29 }).map(() => (
-          <div className={styles.Row}>
+        {Array.from({ length: 29 }).map((_, idx) => (
+          <div className={styles.Row} key={idx.toString()}>
             {list.map((m) => (
               <div key={m.name} className={styles.Card}>
                 {m.name}

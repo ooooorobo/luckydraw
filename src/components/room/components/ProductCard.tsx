@@ -1,6 +1,8 @@
 import styles from '../Room.module.css';
 
-export const ProductCard = ({ product }: { product: { name: string; description: string; img: string } }) => {
+export type Product = { name: string; description: string; img: string };
+
+export const ProductCard = ({ product }: { product: Product }) => {
   return (
     <div className={styles.ProductCard}>
       <img src={product.img} alt={product.name} />

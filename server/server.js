@@ -5,6 +5,7 @@ import { createServer as createViteServer } from 'vite';
 import http from 'http';
 import * as fs from 'fs';
 import { Server } from 'socket.io';
+import { handleSocket } from './socket.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -37,12 +38,7 @@ async function createServer() {
     }
   });
 
-  io.on('connection', (socket) => {
-    console.log('a user connected');
-    socket.on('disconnect', () => {
-      console.log('user disconnected');
-    });
-  });
+  handleSocket(io);
 
   server.listen(3000, () => {
     console.log(`listening on http://localhost:3000`);

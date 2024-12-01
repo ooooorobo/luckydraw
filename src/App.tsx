@@ -1,15 +1,40 @@
 import './App.css';
-import { useSocketIO } from 'react-use-websocket';
+import { EntryForm } from './components/entry/EntryForm.tsx';
+import { useEffect, useState } from 'react';
+import { socket } from './lib/socket.ts';
+import { Product } from './components/room/components/ProductCard.tsx';
 import { Room } from './components/room/Room.tsx';
 
-function App() {
-  const { sendMessage, lastMessage, readyState } = useSocketIO('ws://localhost:3000');
+export type RoomData = {
+  participants: { name: string }[];
+  currentProduct: Product;
+};
 
-  return (
-    <>
-      <Room />
-    </>
-  );
+function App() {
+  const [isConnected, setConnected] = useState(false);
+  const [roomState, setRoomState] = useState<RoomData | null>(null);
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    const onConnect = () => setConnected(true);
+
+    const onDisconnect = () => setConnected(false);
+
+    socket.on('connect', onConnect);
+    socket.on('disconnect', onDisconnect);
+
+    const onRoomUpdate = (room) => setRoomState(room);
+
+    socket.on('room update', onRoomUpdate);
+
+    return () => {
+      socket.off('connect', onConnect);
+      socket.off('disconnect', onDisconnect);
+      socket.off('room update', onRoomUpdate);
+    };
+  }, []);
+
+  return <>{roomState ? <Room roomState={roomState} /> : <EntryForm setName={setName} />}</>;
 }
 
 export default App;
