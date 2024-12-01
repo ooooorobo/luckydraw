@@ -4,7 +4,7 @@ import { log } from './logUtil.js';
 
 const room = 'room';
 let participants = [];
-let currentProductIdx = 6;
+let currentProductIdx = 0;
 let chatList = [];
 
 /**
