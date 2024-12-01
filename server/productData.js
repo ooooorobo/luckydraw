@@ -36,7 +36,7 @@ export const ProductData = [
   },
   {
     name: '뜨개구리 예약권',
-    description: '완성하는대로 드립니다',
+    description: '완성하는대로 드립니다 (현재 70% 완성)',
     img: '/image/frog.jpeg',
   },
   {
