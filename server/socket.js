@@ -20,6 +20,7 @@ export const handleSocket = (io) => {
   io.on('connection', (socket) => {
     log('a user connected');
     let user = null;
+    let isAdmin = false;
 
     socket.on('disconnect', () => {
       log(`user ${user?.name ?? ''} disconnected`);
@@ -36,11 +37,24 @@ export const handleSocket = (io) => {
         log(`중복된 이름 요청 발생 - ${payload.name}`);
         return;
       }
+
       // 없으면 join
       socket.send('join');
       socket.join(room);
 
       user = { name: payload.name };
+
+      if (payload.name === process.env.ADMIN_NAME) {
+        log(`${payload.name} 입장`);
+
+        socket.emit('admin');
+        isAdmin = true;
+
+        callback?.(true);
+        updateRoomBroadcast();
+
+        return;
+      }
 
       participants.push(user);
       updateRoomBroadcast();

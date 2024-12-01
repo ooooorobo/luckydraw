@@ -6,6 +6,7 @@ import http from 'http';
 import * as fs from 'fs';
 import { Server } from 'socket.io';
 import { handleSocket } from './socket.js';
+import 'dotenv/config';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

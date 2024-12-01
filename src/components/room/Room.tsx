@@ -4,17 +4,16 @@ import { useRef } from 'react';
 import { ProductCard } from './components/ProductCard.tsx';
 import { RoomData } from '../../App.tsx';
 
-const members = [0, 11, 5, 10, 6, 9, 7, 8, 1, 14, 2, 13, 3, 12, 4].map((name) => ({
-  name: name.toString(),
-}));
-
-export const Room = ({ roomState }: { roomState: RoomData }) => {
+export const Room = ({ roomState, name, isAdmin }: { roomState: RoomData; name: string; isAdmin: boolean }) => {
   console.log(roomState);
   const rouletteRef = useRef<RouletteRef>();
 
   return (
     <div className={styles.Container}>
       <h1 className={styles.Title}>🤩 럭키드로우 🤩</h1>
+      <p>
+        <strong>{name}</strong>님, 오늘 와주셔서 감사해요!
+      </p>
       <div className={styles.ChatWrapper}>
         <p>
           <strong>방장의 말</strong>

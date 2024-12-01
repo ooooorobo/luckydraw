@@ -14,6 +14,7 @@ function App() {
   const [isConnected, setConnected] = useState(false);
   const [roomState, setRoomState] = useState<RoomData | null>(null);
   const [name, setName] = useState('');
+  const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
     const onConnect = () => setConnected(true);
@@ -24,17 +25,22 @@ function App() {
     socket.on('disconnect', onDisconnect);
 
     const onRoomUpdate = (room) => setRoomState(room);
-
     socket.on('room update', onRoomUpdate);
+
+    const onAdmin = () => setAdmin(true);
+    socket.on('admin', onAdmin);
 
     return () => {
       socket.off('connect', onConnect);
       socket.off('disconnect', onDisconnect);
       socket.off('room update', onRoomUpdate);
+      socket.off('admin', onAdmin);
     };
   }, []);
 
-  return <>{roomState ? <Room roomState={roomState} /> : <EntryForm setName={setName} />}</>;
+  return (
+    <>{roomState ? <Room roomState={roomState} name={name} isAdmin={admin} /> : <EntryForm setName={setName} />}</>
+  );
 }
 
 export default App;
