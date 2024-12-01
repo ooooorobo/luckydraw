@@ -20,7 +20,11 @@ function App() {
   useEffect(() => {
     const onConnect = () => setConnected(true);
 
-    const onDisconnect = () => setConnected(false);
+    const onDisconnect = () => {
+      setConnected(false);
+      alert('팅김!!!!!!!! 새로고침할게요!!!!!!!!!!');
+      location.reload();
+    };
 
     socket.on('connect', onConnect);
     socket.on('disconnect', onDisconnect);
