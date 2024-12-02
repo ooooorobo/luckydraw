@@ -6,13 +6,18 @@ export const ProductData = [
   },
   {
     name: '먹뱉 인형',
-    description: '검탐 스쿼드 유행템',
+    description: '검탐 스쿼드 유행템 (해외에서 날아오는중..)',
     img: '/image/dlsgud1.jpeg',
   },
   {
     name: '먹뱉 인형 2',
     description: '아직 배송이 안 와서 오면 드립니다',
     img: '/image/dlsgud2.jpeg',
+  },
+  {
+    name: '피규어 세트',
+    description: '조예진 최애 피규어 + 오늘 갓 뽑은 캡슐 하나',
+    img: '/image/vlrbdj.png',
   },
   {
     name: '잔디 코스터 (2개입)',
@@ -26,13 +31,8 @@ export const ProductData = [
   },
   {
     name: '과자 물고 가는 갈매기',
-    description: '새우깡',
+    description: '어제 하루종일 직접 뜬 갈매기와 새우깡',
     img: '/image/rkfaorl.jpeg',
-  },
-  {
-    name: '액막이 명태 예약권',
-    description: '다음주 월요일에 드립니다',
-    img: '/image/audxo.jpeg',
   },
   {
     name: '뜨개구리 예약권',
