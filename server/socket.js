@@ -73,6 +73,8 @@ export const handleSocket = (io) => {
     });
 
     socket.on('spin', () => {
+      if (participants.length === 0) return;
+      
       const randomIndex = Math.floor(Math.random() * participants.length);
 
       const cardWidth = 75;
