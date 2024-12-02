@@ -44,6 +44,17 @@ export const Roulette = forwardRef(function _Roulette({ list }: { list: Roulette
       wheelRef.current!.style.transitionDuration = '';
       const resetPosition = -(landingPosition % (cardsPerRow * cardSpacing));
       wheelRef.current!.style.transform = `translate3d(${resetPosition}px, 0px, 0px)`;
+      try {
+        // eslint-disable-next-line
+        // @ts-ignore
+        confetti?.({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+        });
+      } catch (e) {
+        console.error(e);
+      }
     }, 6000);
   };
 
