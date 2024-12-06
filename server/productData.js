@@ -45,16 +45,6 @@ export const ProductData = [
     img: '/image/tea.jpeg',
   },
   {
-    name: '예진 Pick 티 세트 3',
-    description: '엄선한 티 7종 & 직접 블렌딩한 티',
-    img: '/image/tea.jpeg',
-  },
-  {
-    name: '예진 Pick 티 세트 4',
-    description: '엄선한 티 7종 & 직접 블렌딩한 티',
-    img: '/image/tea.jpeg',
-  },
-  {
     name: '끝!!',
     description: '이제 가세요..',
     img: '/image/waiting.png',
