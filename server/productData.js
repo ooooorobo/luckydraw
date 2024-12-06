@@ -10,13 +10,8 @@ export const ProductData = [
     img: '/image/dlsgud1.jpeg',
   },
   {
-    name: '먹뱉 인형 2',
-    description: '아직 배송이 안 와서 오면 드립니다',
-    img: '/image/dlsgud2.jpeg',
-  },
-  {
     name: '피규어 세트',
-    description: '조예진 최애 피규어 + 오늘 갓 뽑은 캡슐 하나',
+    description: '조예진 최애 피규어 + 월요일에 뽑은 캡슐 하나',
     img: '/image/vlrbdj.png',
   },
   {
@@ -31,13 +26,13 @@ export const ProductData = [
   },
   {
     name: '과자 물고 가는 갈매기',
-    description: '어제 하루종일 직접 뜬 갈매기와 새우깡',
+    description: '주말에 하루종일 직접 뜬 갈매기와 새우깡',
     img: '/image/rkfaorl.jpeg',
   },
   {
-    name: '뜨개구리 예약권',
-    description: '완성하는대로 드립니다 (현재 70% 완성)',
-    img: '/image/frog.jpeg',
+    name: '액막이 명태',
+    description: '어제 뜬 명태 (꽤 잘 떴음)',
+    img: '/image/audxo.jpeg',
   },
   {
     name: '예진 Pick 티 세트',
@@ -60,8 +55,8 @@ export const ProductData = [
     img: '/image/tea.jpeg',
   },
   {
-    name: '식사권',
-    description: '구디로 가드립니다',
-    img: '/image/coupon.png',
+    name: '끝!!',
+    description: '이제 가세요..',
+    img: '/image/waiting.png',
   },
 ];
